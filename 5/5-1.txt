@@ -1,0 +1,74 @@
+<?php
+$name = $_GET['name'];//获取用户输入的姓名
+//name的合法性问题？
+if(strlen($name)>0){//如果输入了用户名
+    if(file_exists("{$name}.ini")){//配置文件存在，非第一次使用
+        if(!is_numeric($_GET['index'])){//如果索引参数不是数字，就从配置文件里读取上次索引
+            $f=fopen("$name.ini", 'r');
+            $index = (int)fread($f, 9999999);
+            fclose($f);
+        }else{//否则，强制整型
+            $index = (int)$_GET['index'];
+        }
+    }else {//第一次使用，为其生成打乱的个性单词本，写入配置文件记录索引位置
+        $ws = file("cet4.txt",FILE_IGNORE_NEW_LINES);
+        shuffle($ws);
+        $temp = implode(PHP_EOL, $ws);
+        $f = fopen("$name.txt", 'w');
+        fwrite($f, $temp);
+        fclose($f);
+        $index = 0;
+    }
+    $ws = file("$name.txt",FILE_IGNORE_NEW_LINES);//读取单词
+    //index容错处理      
+    if($index>=count($ws)){//下界处理，索引大于所有单词数
+        $index=(int)(count($ws)/20)*20;
+    }
+    file_put_contents("{$name}.ini", $index);  //写入索引到记录文件  
+}
+?><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>开始使用 layui</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <style type="text/css">
+      li{
+        margin: 10px 0px 10px 50px;
+        list-style: decimal;
+      }
+  </style>
+</head>
+<body>
+<ol start="<?=$index+1?>">
+<?php 
+for ($i=$index; $i<$index+20; $i++) { 
+    echo "<li >",$ws[$i],'<i class="layui-icon layui-icon-star"></i>';
+}
+?>
+</ol>
+<a href="?name=<?=$name?>&index=0" class="layui-btn">首页</a> <a href="#" class="layui-btn">上一页</a> <a href="?name=<?=$name?>&index=<?=$i?>" class="layui-btn">下一页</a> <a href="#" class="layui-btn">尾页</a>
+<!-- 你的 HTML 代码 -->
+ 
+<script src="./layui/layui.js"></script>
+<script>
+layui.use(['layer', 'form', 'jquery'], function(){
+  var layer = layui.layer,
+  form = layui.form;
+  window.jQuery = window.$ = layui.jquery;  
+
+  if(!<?=strlen($name)?>){//用户名为空时，弹出输入姓名
+    layer.open({
+      title: '注意',
+      content: '请输入姓名：<input type="text" id="ff">',
+      yes: function(index, layero){//用户点击确定后回调
+        window.location.href="?name="+$('#ff').val();//跳转到带用户名的处理
+        layer.close(index);
+      }
+    }); 
+  } 
+});
+</script> 
+</body>
+</html>

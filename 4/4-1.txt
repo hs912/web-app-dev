@@ -1,0 +1,37 @@
+<?php
+$article=<<<article
+China on Wednesday issued a white paper to expound on its defensive national defense policy in the new era and explain the practice, purposes and significance of China's efforts to build a fortified national defense and a strong military.
+
+Titled "China's National Defense in the New Era," the white paper was released by the State Council Information Office, with a view to helping the international community better understand China's national defense.
+
+The main body of the white paper was divided into six sections: the international security situation, China's defensive national defense policy in the new era, fulfilling the missions and tasks of China's armed forces in the new era, reform in China's national defense and armed forces, reasonable and appropriate defense expenditure, and actively contributing to building a community with a shared future for mankind.
+
+It is the 10th white paper on national defense the Chinese government has issued since 1998 and the first comprehensive one since the 18th National Congress of the Communist Party of China in 2012.
+
+A number of figures were also used in the 27,000-character white paper, and 10 tables on topics such as the breakdown of China's defense expenditure and international cooperation activities were added as appendices.
+
+Win-win cooperation remain the irreversible trends of the times, the white paper noted, adding that there are prominent destabilizing factors and uncertainties in international security, and the world is not yet a tranquil place.
+
+According to the white paper, resolutely safeguarding China's sovereignty, security and development interests is the fundamental goal of China's national defense in the new era, whose distinctive feature is never seeking hegemony, expansion or spheres of influence.
+
+Identifying this feature, the white paper clearly demonstrated the defensive nature of China's national defense policy and the transparency of its strategic intent, said Shi Qingren, an associate research fellow with the Academy of Military Sciences (AMS) of the Chinese People's Liberation Army.
+
+"The white paper, for the first time, outlines China's national defense policy system," said Cao Yanzhong, an AMS research fellow. "It clearly shows the world the strategic direction, basic principles and global significance of the development of China's national defense and the Chinese armed forces."
+
+The white paper gave detailed information on China's defense expenditure, described as reasonable and appropriate.
+
+Compared to other major countries, the ratios of China's defense expenditure to GDP and to government expenditure, as well as the per capita defense expenditure of the country, remain at a relatively low level, it added.
+
+The white paper also devoted a section to explain Chinese military's efforts and contribution to building a community with a shared future for mankind and fulfilling its international obligations as the armed forces of a major country.
+
+China firmly believes that hegemony and expansion are doomed to failure, and security and prosperity shall be shared, said the white paper.
+article;
+$paragraphs = explode(PHP_EOL, $article);
+foreach ($paragraphs as $paragraph) {
+    $words = explode(" ", $paragraph);
+    foreach ($words as $word) {
+        echo "<a href=\"https://cn.bing.com/dict/search?q=$word\" target=_blank>$word</a> ";
+    }
+    echo "<br>";
+}
+?>

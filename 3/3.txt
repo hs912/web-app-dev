@@ -1,0 +1,9 @@
+<?php
+	echo "<table>";
+	for($i=1;$i<=9;$i++){
+		echo "<tr>";
+		for($j=1;$j<=$i;$j++){
+			echo "<td style='border:1px #ccc solid;width:80px'>",$j,"x",$i,"=",$i*$j,"<br>";
+		}
+	}
+?>

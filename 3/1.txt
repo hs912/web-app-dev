@@ -1,0 +1,23 @@
+<?php
+	$t=getdate();
+	echo "当前时刻：",$t['hours'],"时",$t['minutes'],'分',$t['seconds'],'秒，';
+
+	if($t['hours']<6){
+		echo "凌晨好！";
+	}
+	else if($t['hours']<9){
+		echo "早上好！";
+	}
+	else if($t['hours']<12){
+		echo "上午好！";
+	}
+	else if($t['hours']<14){
+		echo "中午好！";
+	}
+	else if($t['hours']<19){
+		echo "下午好！";
+	}
+	else{
+		echo "晚上好！";
+	}
+?>

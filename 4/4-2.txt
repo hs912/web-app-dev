@@ -1,0 +1,20 @@
+<?php
+$min=5;
+$max=10;
+for ($i=$min; $i <=$max ; $i++) { 
+    echo "[<a href='?n=$i'>抽取{$i}张</a>] ";
+}
+echo "<br>";
+$n=(int)$_GET["n"];
+if($n<$min||$n>$max){
+    die("抽取的牌张数超过范围！");
+}
+$cards = [];
+for ($i=1; $i <=54 ; $i++) { 
+    $cards[] = $i;
+}
+shuffle($cards);
+for ($i=0; $i < $n; $i++) { 
+    echo "<img src='cards/veryhuo.com_pkp_$cards[$i].jpg'>";
+}
+?>
